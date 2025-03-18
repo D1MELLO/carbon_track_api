@@ -101,4 +101,5 @@ def get_emission_factor(source):
         return DEFAULT_EMISSION_FACTORS[source]
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    port = int(os.getenv("PORT", 5000))  # Usa a porta definida pelo Render ou 5000 como padrão
+    app.run(host="0.0.0.0", port=port, debug=True)
