@@ -18,6 +18,10 @@ DEFAULT_EMISSION_FACTORS = {
     "dairy": 2.0,  # kg CO2 por kg de laticínios
 }
 
+@app.route("/")
+def home():
+    return "Bem-vindo à API de Pegada de Carbono! Use o endpoint /calculate para calcular."
+
 @app.route("/calculate", methods=["POST"])
 def calculate():
     # Recebe os dados do app Android
@@ -56,7 +60,6 @@ def calculate():
     })
 
 def get_emission_factor(source):
-    # Tenta obter o fator de emissão da API do Carbon Interface
     try:
         if source in ["car", "bus", "plane"]:
             response = requests.post(
@@ -72,6 +75,7 @@ def get_emission_factor(source):
                     "fuel": "gasoline" if source == "car" else "diesel"
                 }
             )
+            print("Resposta da API do Carbon Interface:", response.text)  # Log da resposta
             return response.json().get("data", {}).get("attributes", {}).get("carbon_kg", DEFAULT_EMISSION_FACTORS[source])
         elif source == "electricity":
             response = requests.post(
@@ -86,9 +90,9 @@ def get_emission_factor(source):
                     "unit": "kWh"
                 }
             )
+            print("Resposta da API do Carbon Interface:", response.text)  # Log da resposta
             return response.json().get("data", {}).get("attributes", {}).get("carbon_kg", DEFAULT_EMISSION_FACTORS[source])
         elif source in ["beef", "dairy"]:
-            # Para alimentos, usamos fatores padrão
             return DEFAULT_EMISSION_FACTORS[source]
     except Exception as e:
         print(f"Erro ao obter fator de emissão: {e}")
