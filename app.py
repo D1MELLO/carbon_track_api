@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)  # Habilita CORS para todas as rotas
 
 # Chave de API do Carbon Interface (usando variável de ambiente)
-CARBON_INTERFACE_API_KEY = os.getenv("CARBON_INTERFACE_API_KEY")
+CARBON_INTERFACE_API_KEY = os.getenv("cUr4PDUXEpSe4mzDjHkQ")
 CARBON_INTERFACE_URL = "https://www.carboninterface.com/api/v1/estimates"
 
 # Fatores de emissão padrão (caso a API do Carbon Interface não esteja disponível)
