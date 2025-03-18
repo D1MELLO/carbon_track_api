@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
-# Chave de API do Carbon Interface (substitua pela sua chave)
-CARBON_INTERFACE_API_KEY = "cUr4PDUXEpSe4mzDjHkQ"
+# Chave de API do Carbon Interface (usando variável de ambiente)
+CARBON_INTERFACE_API_KEY = os.getenv("CARBON_INTERFACE_API_KEY")
 CARBON_INTERFACE_URL = "https://www.carboninterface.com/api/v1/estimates"
 
 # Fatores de emissão padrão (caso a API do Carbon Interface não esteja disponível)
